@@ -1,0 +1,7 @@
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Banner from '../components/Banner'
+import ListaFilmes from '../components/ListaFilmes'
+import Pesquisa from '../components/Pesquisa'
+import { getCatalogMovies, getMovie } from '../services/omdb'
+export default function Home(){const[featured,setFeatured]=useState(null);const[movies,setMovies]=useState([]);const[error,setError]=useState('');useEffect(()=>{Promise.all([getMovie('tt0133093'),getCatalogMovies()]).then(([feature,list])=>{setFeatured(feature);setMovies(list.slice(0,4))}).catch((err)=>setError(err.message))},[]);return <><Banner movie={featured}/><section className="intro section"><div className="container intro-grid"><div><p className="eyebrow">Bem-vindo ao CINEFLIX</p><h2>Filmes para cada momento</h2><p>Explore uma seleção viva de filmes, encontre novos favoritos e descubra todos os detalhes antes de apertar o play.</p></div><div className="search-panel"><h3>O que você quer assistir?</h3><p>Pesquise por título e encontre seu próximo filme.</p><Pesquisa/></div></div></section><section className="section"><div className="container"><div className="section-heading"><div><p className="eyebrow">Seleção especial</p><h2>Recomendados para você</h2></div><Link className="button button-secondary" to="/filmes">Ver catálogo</Link></div>{error?<div className="feedback error">{error}</div>:movies.length?<ListaFilmes movies={movies}/>:<div className="feedback">Carregando recomendações...</div>}</div></section></>}

@@ -1,0 +1,1 @@
+export default function Footer(){return <footer className="footer"><div className="container footer-inner"><span><strong>CINEFLIX</strong> · Seu cinema, onde você estiver.</span><span>Dados fornecidos pela OMDb API</span></div></footer>}

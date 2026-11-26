@@ -1,0 +1,3 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+export default function Pesquisa({compact=false,initialValue=''}){const[term,setTerm]=useState(initialValue);const navigate=useNavigate();function submit(event){event.preventDefault();if(term.trim())navigate(`/filmes?busca=${encodeURIComponent(term.trim())}`)}return <form className="search-form" onSubmit={submit}><input value={term} onChange={(e)=>setTerm(e.target.value)} aria-label="Pesquisar filmes" placeholder={compact?'Pesquisar':'Ex.: Interestelar'} /><button type="submit" aria-label="Buscar">⌕</button></form>}
